@@ -11,9 +11,7 @@ This Lambda function:
 import json
 import os
 import boto3
-import re
-from typing import Dict, Any, Optional
-from urllib.parse import parse_qs, urlparse
+from typing import Dict, Any
 
 # Initialize AWS clients (lazy initialization to avoid region errors during import)
 s3_client = None
