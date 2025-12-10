@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>メンテナンス中 - Maintenance</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background-color: white;
+            max-width: 700px;
+            width: 100%;
+            padding: 60px 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .icon {
+            font-size: 80px;
+            margin-bottom: 30px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+        
+        h1 {
+            color: #333;
+            font-size: 32px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 18px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .info-box {
+            background-color: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 30px 0;
+            text-align: left;
+            border-radius: 5px;
+        }
+        
+        .info-box p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        
+        .info-box p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .info-label {
+            font-weight: 600;
+            color: #333;
+            display: inline-block;
+            min-width: 120px;
+        }
+        
+        .contact {
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 1px solid #e0e0e0;
+            color: #777;
+            font-size: 14px;
+        }
+        
+        .spinner {
+            margin: 30px auto;
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 40px 30px;
+            }
+            
+            h1 {
+                font-size: 26px;
+            }
+            
+            .subtitle {
+                font-size: 16px;
+            }
+            
+            .icon {
+                font-size: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon">🔧</div>
+        <h1>メンテナンス中</h1>
+        <h2 style="color: #666; font-size: 24px; margin-bottom: 20px;">Under Maintenance</h2>
+        
+        <p class="subtitle">
+            現在、システムメンテナンスを実施しております。<br>
+            ご不便をおかけして申し訳ございません。
+        </p>
+        
+        <div class="spinner"></div>
+        
+        <div class="info-box">
+            <p><span class="info-label">リクエストID:</span> {{REQUEST_ID}}</p>
+            <p><span class="info-label">タイムスタンプ:</span> {{TIMESTAMP}}</p>
+            <p><span class="info-label">パス:</span> {{PATH}}</p>
+            <p><span class="info-label">ホスト:</span> {{HOST}}</p>
+        </div>
+        
+        <div class="contact">
+            <p>しばらく時間をおいてから再度アクセスしてください。</p>
+            <p>Please try again later.</p>
+        </div>
+    </div>
+</body>
+</html>
