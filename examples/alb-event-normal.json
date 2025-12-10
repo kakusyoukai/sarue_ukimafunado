@@ -1,0 +1,26 @@
+{
+  "requestContext": {
+    "elb": {
+      "targetGroupArn": "arn:aws:elasticloadbalancing:ap-northeast-1:123456789012:targetgroup/lambda-target/1234567890123456"
+    },
+    "identity": {
+      "sourceIp": "192.168.1.100"
+    }
+  },
+  "httpMethod": "GET",
+  "path": "/",
+  "queryStringParameters": {},
+  "headers": {
+    "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "accept-encoding": "gzip, deflate",
+    "accept-language": "ja-JP,ja;q=0.9,en-US;q=0.8,en;q=0.7",
+    "host": "example.com",
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36",
+    "x-amzn-trace-id": "Root=1-67000000-0000000000000000",
+    "x-forwarded-for": "192.168.1.100",
+    "x-forwarded-port": "443",
+    "x-forwarded-proto": "https"
+  },
+  "body": "",
+  "isBase64Encoded": false
+}

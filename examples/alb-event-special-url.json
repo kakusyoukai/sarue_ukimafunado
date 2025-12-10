@@ -1,0 +1,26 @@
+{
+  "requestContext": {
+    "elb": {
+      "targetGroupArn": "arn:aws:elasticloadbalancing:ap-northeast-1:123456789012:targetgroup/lambda-target/1234567890123456"
+    },
+    "identity": {
+      "sourceIp": "192.168.1.100"
+    }
+  },
+  "httpMethod": "GET",
+  "path": "/special/health",
+  "queryStringParameters": {
+    "check": "database"
+  },
+  "headers": {
+    "accept": "application/json",
+    "host": "example.com",
+    "user-agent": "HealthChecker/1.0",
+    "x-amzn-trace-id": "Root=1-67000001-0000000000000001",
+    "x-forwarded-for": "192.168.1.100",
+    "x-forwarded-port": "443",
+    "x-forwarded-proto": "https"
+  },
+  "body": "",
+  "isBase64Encoded": false
+}
