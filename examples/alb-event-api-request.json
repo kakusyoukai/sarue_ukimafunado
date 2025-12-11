@@ -1,0 +1,25 @@
+{
+  "requestContext": {
+    "elb": {
+      "targetGroupArn": "arn:aws:elasticloadbalancing:ap-northeast-1:123456789012:targetgroup/lambda-target/1234567890123456"
+    },
+    "identity": {
+      "sourceIp": "192.168.1.100"
+    }
+  },
+  "httpMethod": "POST",
+  "path": "/api/users",
+  "queryStringParameters": {},
+  "headers": {
+    "accept": "application/json",
+    "content-type": "application/json",
+    "host": "api.example.com",
+    "user-agent": "APIClient/2.0",
+    "x-amzn-trace-id": "Root=1-67000002-0000000000000002",
+    "x-forwarded-for": "192.168.1.100",
+    "x-forwarded-port": "443",
+    "x-forwarded-proto": "https"
+  },
+  "body": "{\"name\":\"Test User\",\"email\":\"test@example.com\"}",
+  "isBase64Encoded": false
+}

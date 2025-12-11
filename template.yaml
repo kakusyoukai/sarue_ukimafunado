@@ -1,0 +1,86 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Lambda function for ALB maintenance handler
+
+Parameters:
+  MaintenanceMode:
+    Type: String
+    Default: 'true'
+    AllowedValues:
+      - 'true'
+      - 'false'
+    Description: Enable or disable maintenance mode
+  
+  S3Bucket:
+    Type: String
+    Default: 'maintenance-pages'
+    Description: S3 bucket containing maintenance HTML page
+  
+  S3Key:
+    Type: String
+    Default: 'maintenance.html'
+    Description: S3 key (path) to maintenance HTML file
+  
+  SpecialUrlPath:
+    Type: String
+    Default: '/special'
+    Description: URL path prefix for special Lambda invocation
+  
+  SpecialLambdaArn:
+    Type: String
+    Default: ''
+    Description: ARN of Lambda function to invoke for special URLs
+
+Resources:
+  MaintenanceHandlerFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: maintenance-handler
+      Handler: lambda_handler.lambda_handler
+      Runtime: python3.13
+      CodeUri: .
+      MemorySize: 256
+      Timeout: 30
+      Environment:
+        Variables:
+          MAINTENANCE_MODE: !Ref MaintenanceMode
+          S3_BUCKET: !Ref S3Bucket
+          S3_KEY: !Ref S3Key
+          SPECIAL_URL_PATH: !Ref SpecialUrlPath
+          SPECIAL_LAMBDA_ARN: !Ref SpecialLambdaArn
+      Policies:
+        - S3ReadPolicy:
+            BucketName: !Ref S3Bucket
+        - Statement:
+          - Effect: Allow
+            Action:
+              - lambda:InvokeFunction
+            Resource: !Ref SpecialLambdaArn
+            Condition:
+              StringNotEquals:
+                lambda:FunctionArn: ''
+      Events:
+        AlbEvent:
+          Type: HttpApi
+          Properties:
+            Path: /{proxy+}
+            Method: ANY
+
+  MaintenanceHandlerLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub '/aws/lambda/${MaintenanceHandlerFunction}'
+      RetentionInDays: 7
+
+Outputs:
+  MaintenanceHandlerFunctionArn:
+    Description: ARN of the maintenance handler Lambda function
+    Value: !GetAtt MaintenanceHandlerFunction.Arn
+    Export:
+      Name: MaintenanceHandlerFunctionArn
+  
+  MaintenanceHandlerFunctionName:
+    Description: Name of the maintenance handler Lambda function
+    Value: !Ref MaintenanceHandlerFunction
+    Export:
+      Name: MaintenanceHandlerFunctionName
